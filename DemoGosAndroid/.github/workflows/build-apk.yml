@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: DemoGosAndroid
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,8 +30,6 @@ jobs:
         with:
           gradle-version: '9.5.0'
 
-      # The ZIP contains the wrapper configuration. The bootstrap JAR is
-      # generated from the official Gradle distribution on the CI runner.
       - name: Generate Gradle Wrapper
         run: gradle wrapper --gradle-version 9.5.0
 
@@ -38,5 +40,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: DemoGos-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: DemoGosAndroid/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
